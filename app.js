@@ -33,6 +33,21 @@ function renderCard() {
         `)
     })
 }
+function renderCard2() {
+    cards.innerHTML = ''
+    randomNumbers(totalPhotos).forEach(number => {
+        cards.insertAdjacentHTML('beforeend', `
+            <li style="transition: ${flipTime}s ease-in-out;" class="card rotate0">
+                <div id="toggle" onclick="clickFontView(this)" class="view front-view dark-mode-icon">
+                    <i class="icofont-question"></i>
+                </div>
+                <div class="view back-view">
+                    <img src="./img/${number}.jpg" alt="">
+                </div>
+            </li>
+        `)
+    })
+}
 
 renderCard()
 
@@ -188,10 +203,18 @@ function clickFontView(_this) {
 
     return
 }
+var checkbox = document.querySelector("input[name=checkbox]");
 
 document.querySelector('.refresh').onclick = function () {
-    renderCard()
-    firstCard = 1
+    
+    if(checkbox.checked)
+    {   
+        console.log(1)
+        renderCard2();
+    } else{
+        renderCard();
+    }
+        firstCard = 1
     secondCard = 2
     flips = 0
     time = timeMax
@@ -203,7 +226,6 @@ document.querySelector('.refresh').onclick = function () {
     countdown = ''
 }
 ///dark-mode
-var checkbox = document.querySelector("input[name=checkbox]");
 
 checkbox.addEventListener('change', function() {
   if (this.checked) {
