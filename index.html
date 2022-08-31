@@ -11,11 +11,15 @@
 </head>
 
 <body>
-    <div  class="switchBtn">
+    <div class="switchBtn">
         <label class="switch">
             <input type="checkbox" name="checkbox">
             <span class="slider round"></span>
         </label>
+    </div>
+    <div class="audio ">
+        <i onclick="pauseAudio()" class="icofont-ui-volume on"></i>
+        <i onclick="playAudio()" class="icofont-volume-mute off"></i>
     </div>
     <main class="wrapper">
 
@@ -46,7 +50,10 @@
         </div>
 
     </main>
-
+    <audio controls loop  id="audio" style="display:none">
+        <source src="backgroundAudio.webm" type="audio/webm">
+    </audio>
+    <audio src="./soundClick.wav"></audio>
     <script src="./app.js"></script>
 </body>
 

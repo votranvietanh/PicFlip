@@ -27,7 +27,7 @@ function renderCard() {
                     <i class="icofont-question"></i>
                 </div>
                 <div class="view back-view">
-                    <img src="./img/${number}.jpg" alt="">
+                    <img src="./img/${number}.jpg" alt="" draggable="false">
                 </div>
             </li>
         `)
@@ -76,9 +76,10 @@ if (getAchievement != null) {
     achievementFlips.innerHTML = getAchievement.flips
 }
 // bắt đầu điều khiển khi click vào mỗi hình ()
+var audio = new Audio('');
 function clickFontView(_this) {
     const card = _this.parentElement
-
+    Play()
     // card đầu tiên
     if (firstCard === 1) {
         _this.style.pointerEvents = 'none'
@@ -95,7 +96,6 @@ function clickFontView(_this) {
     // card thứ 2
     else if (secondCard === 2) {
         _this.style.pointerEvents = 'none'
-
         secondCard = card
         secondCard.classList.replace('rotate0', 'rotate180')
         flips++
@@ -206,15 +206,14 @@ function clickFontView(_this) {
 var checkbox = document.querySelector("input[name=checkbox]");
 
 document.querySelector('.refresh').onclick = function () {
-    
-    if(checkbox.checked)
-    {   
+
+    if (checkbox.checked) {
         console.log(1)
         renderCard2();
-    } else{
+    } else {
         renderCard();
     }
-        firstCard = 1
+    firstCard = 1
     secondCard = 2
     flips = 0
     time = timeMax
@@ -227,39 +226,60 @@ document.querySelector('.refresh').onclick = function () {
 }
 ///dark-mode
 
-checkbox.addEventListener('change', function() {
-  if (this.checked) {
-    document.getElementsByTagName('body')[0].style = `background-color:#504747`
-    document.querySelector('.details').classList.add('dark-mode-details')
-    document.querySelector('.achievement').classList.add('dark-mode-details')
+checkbox.addEventListener('change', function () {
+    if (this.checked) {
+        document.getElementsByTagName('body')[0].style = `background-color:#504747`
+        document.querySelector('.details').classList.add('dark-mode-details')
+        document.querySelector('.achievement').classList.add('dark-mode-details')
+        document.querySelector('.audio').classList.add('wheat');
+        const view = document.querySelectorAll("#toggle");
+        for (let i = 0; i < view.length; ++i) {
+            if (view[i].classList.contains('dark-mode-icon')) {
+                view[i].classList.remove('dark-mode-icon');
+                console.log(1)
+            } else {
+                view[i].classList.add('dark-mode-icon');
+                console.log(12)
 
-    const view = document.querySelectorAll("#toggle");
-    for (let i=0;i<view.length;++i)
-    {
-        if (view[i].classList.contains('dark-mode-icon') ) {
-            view[i].classList.remove('dark-mode-icon');
-            console.log(1)
-          } else {
-            view[i].classList.add('dark-mode-icon');
-            console.log(12)
+            }
+        }
+    } else {
+        document.getElementsByTagName('body')[0].style = `background-color:#FFF`
+        document.querySelector('.audio').classList.remove('wheat');
+        document.querySelector('.details').classList.remove('dark-mode-details')
+        document.querySelector('.achievement').classList.remove('dark-mode-details')
 
-          }
+        const view = document.querySelectorAll("#toggle");
+        for (let i = 0; i < view.length; ++i) {
+            if (view[i].classList.contains('dark-mode-icon')) {
+                view[i].classList.remove('dark-mode-icon');
+                console.log(1)
+            }
+        }
     }
-  } else {
-    document.getElementsByTagName('body')[0].style = `background-color:#FFF`
-
-    document.querySelector('.details').classList.remove('dark-mode-details')
-    document.querySelector('.achievement').classList.remove('dark-mode-details')
-
-    const view = document.querySelectorAll("#toggle");
-    for (let i=0;i<view.length;++i){
-    if (view[i].classList.contains('dark-mode-icon') ) {
-        view[i].classList.remove('dark-mode-icon');
-        console.log(1)
-    }
-}
-  }
 });
+// audio
+var x = document.querySelectorAll("audio");
+
+var on = document.querySelector(' .audio .on')
+var off = document.querySelector(' .audio .off')
+function Play() {
+    x[1].play()
+    console.log('au')
+}
+function pauseAudio() {
+    x[0].pause();
+    on.style = `display:none;`
+    off.style = `display:block;`
+}
+
+function playAudio() {
+    x[0].play();
+    off.style = `display:none;`
+    on.style = `display:block;`
+}
+
+
 
 
 
